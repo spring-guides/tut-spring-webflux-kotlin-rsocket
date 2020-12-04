@@ -1,7 +1,7 @@
 package com.example.kotlin.chat.controller
 
 import com.example.kotlin.chat.service.MessageService
-import com.example.kotlin.chat.service.vm.MessageVM
+import com.example.kotlin.chat.service.MessageVM
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set

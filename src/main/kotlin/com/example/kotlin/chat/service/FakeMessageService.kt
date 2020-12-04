@@ -1,8 +1,5 @@
-package com.example.kotlin.chat.service.impl
+package com.example.kotlin.chat.service
 
-import com.example.kotlin.chat.service.MessageService
-import com.example.kotlin.chat.service.vm.MessageVM
-import com.example.kotlin.chat.service.vm.UserVM
 import com.github.javafaker.Faker
 import org.springframework.stereotype.Service
 import java.net.URL
