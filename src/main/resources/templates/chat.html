@@ -23,6 +23,12 @@
             crossorigin="anonymous"></script>
     <script src='https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js'></script>
+
+    <script src='/rsocket-types.js'></script>
+    <script src='/rsocket-flowable.js'></script>
+    <script src='/rsocket-core.js'></script>
+    <script src='/rsocket-websocket-client.js'></script>
+
     <style>
         .chats-row div {
             height: 50%;
@@ -134,33 +140,74 @@
     var messageButton = $('.chat-input button');
     var messageInput = $('.chat-input textarea');
 
-    messageButton.on("click", function() {
-        var content = messageInput.val();
-        messageInput.val("");
-        if (content) {
-            $.post({
-                url: "/api/v1/messages",
-                data: JSON.stringify({content: content , user: user, sent: new Date().toISOString()}),
-                contentType: 'application/json'
-            });
-        }
-    })
-
     chatArea.animate({scrollTop: mediaList.height()}, 1);
-    setInterval(function () {
-        $.get("/api/v1/messages", {lastMessageId: lastMessageId}).done(function (data, status, request) {
-            if (data) {
-                data.forEach(function (v) {
-                    mediaList.append(messageTemplate(v));
+
+    const client = new rsocketCore.RSocketClient({
+        transport: new rsocketWebSocketClient(
+            {
+                url: 'ws://localhost:8080/rsocket',
+            },
+            rsocketCore.BufferEncoders,
+        ),
+        setup: {
+            dataMimeType: 'application/json',
+            metadataMimeType: rsocketCore.MESSAGE_RSOCKET_COMPOSITE_METADATA.string,
+            keepAlive: 5000,
+            lifetime: 60000,
+        },
+    });
+
+    client.connect()
+        .then(rsocket => {
+            var endpoint = "api.v1.messages.stream";
+
+            rsocket.requestChannel(new rsocketFlowable.Flowable(source => {
+                console.log("channel")
+                source.onSubscribe({
+                    cancel: () => {},
+                    request: (n) => {}
+                })
+                messageButton.on("click", function() {
+                    var content = messageInput.val();
+                    messageInput.val("");
+                    if (content) {
+                        source.onNext({
+                            data: Buffer.from(JSON.stringify({content: content , user: user, sent: new Date().toISOString()})),
+                            metadata: rsocketCore.encodeAndAddWellKnownMetadata(
+                                Buffer.alloc(0),
+                                rsocketCore.MESSAGE_RSOCKET_ROUTING,
+                                Buffer.from(String.fromCharCode(endpoint.length) + endpoint)
+                            )
+                        });
+                    }
+                });
+            }))
+                .subscribe({
+                    onSubscribe: (s) => {
+                        s.request(1000)
+                    }
                 });
 
-                chatArea.stop();
-                chatArea.animate({scrollTop: mediaList.height()}, 500);
-            }
+            rsocket.requestStream({
+                metadata: rsocketCore.encodeAndAddWellKnownMetadata(
+                    Buffer.alloc(0),
+                    rsocketCore.MESSAGE_RSOCKET_ROUTING,
+                    Buffer.from(String.fromCharCode(endpoint.length) + endpoint)
+                )
+            })
+                .subscribe({
+                    onSubscribe: (s) => {
+                        s.request(1000)
+                    },
+                    onNext: (e) => {
+                        var v = JSON.parse(e.data);
 
-            lastMessageId = request.getResponseHeader('lastMessageId');
+                        mediaList.append(messageTemplate(v));
+                        chatArea.stop();
+                        chatArea.animate({scrollTop: mediaList.height()}, 500);
+                    }
+                });
         });
-    }, 1000);
 
     /*]]>*/
 </script>

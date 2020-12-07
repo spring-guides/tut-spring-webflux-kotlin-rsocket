@@ -1,10 +1,14 @@
 package com.example.kotlin.chat.service
 
+import kotlinx.coroutines.flow.Flow
+
 interface MessageService {
 
-    suspend fun latest(): List<MessageVM>
+    fun latest(): Flow<MessageVM>
 
-    suspend fun after(messageId: String): List<MessageVM>
+    fun after(messageId: String): Flow<MessageVM>
 
-    suspend fun post(message: MessageVM)
+    fun stream(): Flow<MessageVM>
+
+    suspend fun post(messages: Flow<MessageVM>)
 }

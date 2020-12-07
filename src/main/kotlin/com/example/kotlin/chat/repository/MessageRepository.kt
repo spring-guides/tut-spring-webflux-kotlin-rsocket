@@ -15,7 +15,7 @@ interface MessageRepository : CoroutineCrudRepository<Message, String> {
             LIMIT 10
         ) ORDER BY "SENT"
     """)
-    suspend fun findLatest(): List<Message>
+    fun findLatest(): Flow<Message>
 
     // language=SQL
     @Query("""
@@ -25,5 +25,5 @@ interface MessageRepository : CoroutineCrudRepository<Message, String> {
             ORDER BY "SENT" DESC 
         ) ORDER BY "SENT"
     """)
-    suspend fun findLatest(@Param("id") id: String): List<Message>
+    fun findLatest(@Param("id") id: String): Flow<Message>
 }
