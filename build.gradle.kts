@@ -33,9 +33,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-	}
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	runtimeOnly("com.h2database:h2")
 
