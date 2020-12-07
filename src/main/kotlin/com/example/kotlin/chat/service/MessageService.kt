@@ -2,9 +2,9 @@ package com.example.kotlin.chat.service
 
 interface MessageService {
 
-    fun latest(): List<MessageVM>
+    suspend fun latest(): List<MessageVM>
 
-    fun after(messageId: String): List<MessageVM>
+    suspend fun after(messageId: String): List<MessageVM>
 
-    fun post(message: MessageVM)
+    suspend fun post(message: MessageVM)
 }

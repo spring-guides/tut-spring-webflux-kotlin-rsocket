@@ -5,6 +5,8 @@ import com.example.kotlin.chat.repository.Message
 import com.example.kotlin.chat.repository.MessageRepository
 import com.example.kotlin.chat.service.MessageVM
 import com.example.kotlin.chat.service.UserVM
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -26,7 +28,7 @@ import java.time.temporal.ChronoUnit.MILLIS
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = [
-        "spring.datasource.url=jdbc:h2:mem:testdb"
+        "spring.r2dbc.url=r2dbc:h2:mem:///testdb;USER=sa;PASSWORD=password"
     ]
 )
 class ChatKotlinApplicationTests {
@@ -42,7 +44,7 @@ class ChatKotlinApplicationTests {
     val now: Instant = Instant.now()
 
     @BeforeEach
-    fun setUp() {
+    fun setUp() = runBlocking {
         val secondBeforeNow = now.minusSeconds(1)
         val twoSecondBeforeNow = now.minusSeconds(2)
         val savedMessages = messageRepository.saveAll(
@@ -74,13 +76,13 @@ class ChatKotlinApplicationTests {
     }
 
     @AfterEach
-    fun tearDown() {
+    fun tearDown() = runBlocking {
         messageRepository.deleteAll()
     }
 
     @ParameterizedTest
     @ValueSource(booleans = [true, false])
-    fun `test that messages API returns latest messages`(withLastMessageId: Boolean) {
+    fun `test that messages API returns latest messages`(withLastMessageId: Boolean) = runBlocking{
         val messages: List<MessageVM>? = client.exchange(
             RequestEntity<Any>(
                 HttpMethod.GET,
@@ -117,7 +119,7 @@ class ChatKotlinApplicationTests {
 
 
 	@Test
-	fun `test that messages posted to the API is stored`() {
+	fun `test that messages posted to the API is stored`() = runBlocking {
 		client.postForEntity<Any>(
 			URI("/api/v1/messages"),
 			MessageVM(
