@@ -14,5 +14,5 @@ data class Message(
     @Id var id: String? = null)
 
 enum class ContentType {
-    PLAIN
+    PLAIN, MARKDOWN
 }
