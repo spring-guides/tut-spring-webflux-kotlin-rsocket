@@ -8,6 +8,6 @@ class HtmlController() {
 
     @GetMapping("/")
     fun index(): String {
-        return "chat"
+        return "chatrs"
     }
 }
