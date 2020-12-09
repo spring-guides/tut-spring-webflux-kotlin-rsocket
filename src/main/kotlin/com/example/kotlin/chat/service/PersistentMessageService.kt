@@ -5,12 +5,10 @@ import com.example.kotlin.chat.asRendered
 import com.example.kotlin.chat.mapToViewModel
 import com.example.kotlin.chat.repository.MessageRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.collect
 import org.springframework.stereotype.Service
 
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Service
 @ExperimentalCoroutinesApi
 class PersistentMessageService(val messageRepository: MessageRepository) : MessageService {
 
-    val sender: BroadcastChannel<MessageVM> = BroadcastChannel(Channel.BUFFERED)
+    val sender: MutableSharedFlow<MessageVM> = MutableSharedFlow()
 
     override fun latest(): Flow<MessageVM> =
         messageRepository.findLatest()
@@ -28,12 +26,12 @@ class PersistentMessageService(val messageRepository: MessageRepository) : Messa
         messageRepository.findLatest(messageId)
             .mapToViewModel()
 
-    override fun stream(): Flow<MessageVM> = sender.openSubscription().receiveAsFlow()
+    override fun stream(): Flow<MessageVM> = sender
 
     override suspend fun post(messages: Flow<MessageVM>) =
         messages
-            .onEach { sender.send(it.asRendered()) }
-            .map {  it.asDomainObject() }
+            .onEach { sender.emit(it.asRendered()) }
+            .map { it.asDomainObject() }
             .let { messageRepository.saveAll(it) }
             .collect()
 }
