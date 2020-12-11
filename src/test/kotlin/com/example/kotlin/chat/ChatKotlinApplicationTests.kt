@@ -129,7 +129,7 @@ class ChatKotlinApplicationTests {
 
 		messageRepository.findAll()
 			.first { it.content.contains("HelloWorld") }
-			.apply {
+			.run {
 				assertThat(this.copy(id = null, sent = sent.truncatedTo(MILLIS)))
 					.isEqualTo(Message(
 						"`HelloWorld`",
