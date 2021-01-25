@@ -18,7 +18,7 @@ class MessageResource(val messageService: MessageService) {
         messageService.post(inboundMessages)
 
     @MessageMapping("stream")
-    suspend fun send(): Flow<MessageVM> = messageService
+    fun send(): Flow<MessageVM> = messageService
         .stream()
         .onStart {
             emitAll(messageService.latest())
