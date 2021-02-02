@@ -1153,7 +1153,7 @@ interface MessageService {
 
 Now we can connect the dots and update the `PersistentMessageService` class to integrate the above changes.
 
-[source]
+[source,kotlin]
 -----
 import com.example.kotlin.chat.asDomainObject
 import com.example.kotlin.chat.asRendered
@@ -1192,7 +1192,7 @@ class PersistentMessageService(val messageRepository: MessageRepository) : Messa
 
 First, since the `MessageService` interface has been changed, we need to update the method signatures in the corresponding implementation. Consequently, the `mapToViewModel `extension method that we defined previously in the `Extension.kt` file for the `List` type is now needed for the `Flow` type, instead.
 
-[source]
+[source,kotlin]
 -----
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -1202,7 +1202,7 @@ fun Flow<Message>.mapToViewModel(): Flow<MessageVM> = map { it.asViewModel() }
 
 For better readability we also added the `asRendered` extension function for the MessageVM class. In `Extensions.kt` file:
 
-[source]
+[source,kotlin]
 -----
 fun MessageVM.asRendered(contentType: ContentType = ContentType.MARKDOWN): MessageVM =
    this.copy(content = contentType.render(this.content))
