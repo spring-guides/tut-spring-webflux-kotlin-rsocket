@@ -77,6 +77,8 @@ Alternatively, you can run the `./gradlew bootRun` command in the terminal.
 
 Once the application starts, open the following URL: http://localhost:8080. You will see a chat page with a collection of messages.
 
+image::./images/chat.gif[]
+
 In the following step, we will demonstrate how to integrate our application with a real database to store the messages.
 
 === Project overview
