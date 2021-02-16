@@ -4,7 +4,7 @@
 :project_id: tut-spring-webflux-kotlin-rsocket
 :tabsize: 2
 :image-width: 500
-:images: https://raw.githubusercontent.com/spring-guides/tut-spring-webflux-kotlin-rsocket/master/images
+:images: https://raw.githubusercontent.com/spring-guides/tut-spring-webflux-kotlin-rsocket/master/static
 :book-root: .
 
 The tutorial shows you how to build a simple chat application using Spring Boot and Kotlin. You will learn about the benefits of using Kotlin for server-side development from a syntax perspective.
