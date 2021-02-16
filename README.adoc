@@ -1,8 +1,16 @@
+---
+tags: [kotlin, reactive, rsocket, testing]
+projects: [spring-framework, spring-boot, spring-webflux, spring-messaging]
+---
 :toc:
 :icons: font
 :source-highlighter: prettify
 :project_id: tut-spring-webflux-kotlin-rsocket
 :tabsize: 2
+:image-width: 500
+:book-root: .
+
+= Building Chat Application with Kotlin, Spring Boot, WebFlux & RSocket
 
 == Introduction
 
@@ -1415,3 +1423,5 @@ fun `test that messages streamed to the API is stored`() {
 -----
 
 This was the final part in the tutorial. We started with a simple chat application in which the UI was polling for new messages while the backend was blocking when running the database queries. We gradually added features to the application and migrated it to the reactive Spring stack. The backend is now fully asynchronous, making use of Spring WebFlux and Kotlin coroutines.
+
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
