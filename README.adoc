@@ -4,6 +4,7 @@
 :project_id: tut-spring-webflux-kotlin-rsocket
 :tabsize: 2
 :image-width: 500
+:images: https://raw.githubusercontent.com/spring-guides/tut-spring-webflux-kotlin-rsocket/master/images
 :book-root: .
 
 The tutorial shows you how to build a simple chat application using Spring Boot and Kotlin. You will learn about the benefits of using Kotlin for server-side development from a syntax perspective.
@@ -31,11 +32,11 @@ This project is based on Spring Boot 2.4.0, which requires Kotlin 1.4.10. Make s
 
 Clone the repository from IntelliJ IDEA by choosing `File | New | Project from Version Control`.
 
-image::./images/download-from-vcs.png[]
+image::{images}/download-from-vcs.png[]
 
 Specify the project path: http://github.com/kotlin-hands-on/kotlin-spring-chat.
 
-image::./images/download-from-vcs-github.png[]
+image::{images}/download-from-vcs-github.png[]
 
 Once you clone the project, IntelliJ IDEA will import and open it automatically.
 Alternatively, you can clone the project with the command line:
@@ -47,7 +48,7 @@ $ git clone https://github.com/kotlin-hands-on/kotlin-spring-chat.
 
 Note that the project includes solution branches for each part of the tutorial. You can browse all the branches in the IDE by invoking the Branches action:
 
-image::./images/intellij-git-branches.png[]
+image::{images}/intellij-git-branches.png[]
 
 Or you can use the command line:
 
@@ -56,28 +57,28 @@ git branch -a
 
 It is possible to use the `Compare with branch` command in IntelliJ IDEA to compare your solution with the proposed one.
 
-image::./images/intellij-git-compare-with-branch.png[]
+image::{images}/intellij-git-compare-with-branch.png[]
 
 For instance, here is the list differences between the `initial` branch and `part-2` branch:
 
-image::./images/intellij-git-compare-with-branch-diff.png[]
+image::{images}/intellij-git-compare-with-branch-diff.png[]
 
 By clicking on the individual files, you can see the changes at a line level.
 
-image::./images/intellij-git-compare-with-branch-file-diff.png[]
+image::{images}/intellij-git-compare-with-branch-file-diff.png[]
 
 This should help you in the event that you have any trouble with the instructions at any stage of the tutorial.
 
 === Launching the application
 The `main` method for the application is located in the `ChatKotlinApplication.kt` file. Simply click on the gutter icon next to the main method or hit the `Alt+Enter` shortcut to invoke the launch menu in IntelliJ IDEA:
 
-image::./images/intellij-run-app-from-main.png[]
+image::{images}/intellij-run-app-from-main.png[]
 
 Alternatively, you can run the `./gradlew bootRun` command in the terminal.
 
 Once the application starts, open the following URL: http://localhost:8080. You will see a chat page with a collection of messages.
 
-image::./images/chat.gif[]
+image::{images}/chat.gif[]
 
 In the following step, we will demonstrate how to integrate our application with a real database to store the messages.
 
@@ -85,7 +86,7 @@ In the following step, we will demonstrate how to integrate our application with
 
 Let's take a look at the general application overview. In this tutorial, we are going to build a simple chat application that has the following architecture:
 
-image::./images/application-architecture.png[]
+image::{images}/application-architecture.png[]
 
 Our application is an ordinary 3-tier web application. The client facing tier is implemented by the `HtmlController` and `MessagesResource` classes. The application makes use of server-side rendering via the _Thymeleaf_ template engine and is served by `HtmlController`. The message data API is provided by `MessagesResource`, which connects to the service layer.
 
@@ -98,7 +99,7 @@ The `PersistentMessageService` connects to a database to store the messages. We 
 
 After you have downloaded the project sources and opened them in the IDE, you will see the following structure, which includes the classes mentioned above.
 
-image::./images/project-tree.png[]
+image::{images}/project-tree.png[]
 
 
 Under the `main/kotlin` folder there are packages and classes that belong to the application. In that folder, we are going to add more classes and make changes to the existing code to evolve the application.
@@ -287,7 +288,7 @@ runtimeOnly("com.h2database:h2")
 
 ⚠️ To refresh the list of the project dependencies, click on the little elephant icon that appears in the top right-hand corner of the editor.
 
-image::./images/intellij-gradle-reload.png[]
+image::{images}/intellij-gradle-reload.png[]
 
 === Create database schema and configuration
 
@@ -307,7 +308,7 @@ CREATE TABLE IF NOT EXISTS messages (
 
 ⌨️ Create a new folder called `sql` in the `src/main/resources` directory. Then put the SQL code from above into the `src/main/resources/sql/schema.sql` file.
 
-image::./images/schema-sql-location.png[]
+image::{images}/schema-sql-location.png[]
 
 Also, you should modify `application.properties` so it contains the following attributes:
 
@@ -607,7 +608,7 @@ The test above looks similar to the previous one, except we check that the poste
 
 Once we have implemented all these tests, we can run them and see whether they pass.
 
-image::./images/intellij-running-tests.png[]
+image::{images}/intellij-running-tests.png[]
 
 At this stage, we added message persistence to our chat application. The messages can now be delivered to all active clients that connect to the application. Additionally, we can now access the historical data, so everyone can read previous messages if they need to.
 
