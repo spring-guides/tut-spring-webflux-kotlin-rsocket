@@ -12,8 +12,6 @@ projects: [spring-framework, spring-boot, spring-webflux, spring-messaging]
 
 = Building Chat Application with Kotlin, Spring Boot, WebFlux & RSocket
 
-== Introduction
-
 The tutorial shows you how to build a simple chat application using Spring Boot and Kotlin. You will learn about the benefits of using Kotlin for server-side development from a syntax perspective.
 
 We’ll start with a minimal implementation of the application, and we will evolve it step by step.At the start, the application will generate and display fake messages and use the classical blocking request-response model to get data to the UI.Through the tutorial, we are going to evolve the application by adding persistence and extensions, and migrating to a non-blocking streaming style for serving the data from the backend to the UI.
@@ -1421,6 +1419,8 @@ fun `test that messages streamed to the API is stored`() {
    }
 }
 -----
+
+== Summary
 
 This was the final part in the tutorial. We started with a simple chat application in which the UI was polling for new messages while the backend was blocking when running the database queries. We gradually added features to the application and migrated it to the reactive Spring stack. The backend is now fully asynchronous, making use of Spring WebFlux and Kotlin coroutines.
 
