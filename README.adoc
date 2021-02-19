@@ -24,7 +24,7 @@ This tutorial is designed for Java developers who have already had their hands o
 
 == Part 1: Initial setup and introduction to the project
 
-To start working on this tutorial, we'll need one of the latest versions of IntelliJ IDEA – any version from 2018.1 onwards.You can download the latest free community version [here](https://www.jetbrains.com/idea/download).
+To start working on this tutorial, we'll need one of the latest versions of IntelliJ IDEA – any version from 2018.1 onwards.You can download the latest free community version https://www.jetbrains.com/idea/download[here].
 
 This project is based on Spring Boot 2.4.0, which requires Kotlin 1.4.10. Make sure version 1.4+ of the Kotlin plugin is installed.To update the Kotlin plugin, use `Tools | Kotlin | Configure Kotlin Plugin Updates`.
 
