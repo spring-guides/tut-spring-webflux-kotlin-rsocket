@@ -34,7 +34,7 @@ Clone the repository from IntelliJ IDEA by choosing `File | New | Project from V
 
 image::{images}/download-from-vcs.png[]
 
-Specify the project path: http://github.com/kotlin-hands-on/kotlin-spring-chat.
+Specify the project path: https://github.com/kotlin-hands-on/kotlin-spring-chat.
 
 image::{images}/download-from-vcs-github.png[]
 
@@ -42,7 +42,7 @@ Once you clone the project, IntelliJ IDEA will import and open it automatically.
 Alternatively, you can clone the project with the command line:
 
 [source,bash]
-$ git clone https://github.com/kotlin-hands-on/kotlin-spring-chat.
+$ git clone https://github.com/kotlin-hands-on/kotlin-spring-chat
 
 === Solution branches
 
