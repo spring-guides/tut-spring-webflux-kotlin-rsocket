@@ -721,7 +721,7 @@ We can now move forward and implement support for the `MARKDOWN` content type. F
 -----
 dependencies {
    ...
-   implementation("org.jetbrains:markdown:0.1.45")
+   implementation("org.jetbrains:markdown:0.2.2")
    ...
 }
 -----
@@ -1274,7 +1274,7 @@ We are going to add one more dependency specifically for tests. https://github.c
 -----
 dependencies {
     ...
-    testImplementation("app.cash.turbine:turbine:0.3.0")
+    testImplementation("app.cash.turbine:turbine:0.4.1")
     ...
 }
 -----
