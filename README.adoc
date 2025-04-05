@@ -9,7 +9,7 @@
 
 The tutorial shows you how to build a simple chat application using Spring Boot and Kotlin. You will learn about the benefits of using Kotlin for server-side development from a syntax perspective.
 
-We’ll start with a minimal implementation of the application, and we will evolve it step by step.At the start, the application will generate and display fake messages and use the classical blocking request-response model to get data to the UI.Through the tutorial, we are going to evolve the application by adding persistence and extensions, and migrating to a non-blocking streaming style for serving the data from the backend to the UI.
+We’ll start with a minimal implementation of the application, and we will evolve it step by step. At the start, the application will generate and display fake messages and use the classical blocking request-response model to get data to the UI.Through the tutorial, we are going to evolve the application by adding persistence and extensions, and migrating to a non-blocking streaming style for serving the data from the backend to the UI.
 
 The tutorial consists of 5 parts:
 
@@ -24,9 +24,9 @@ This tutorial is designed for Java developers who have already had their hands o
 
 == Part 1: Initial setup and introduction to the project
 
-To start working on this tutorial, we'll need one of the latest versions of IntelliJ IDEA – any version from 2018.1 onwards.You can download the latest free community version https://www.jetbrains.com/idea/download[here].
+To start working on this tutorial, we'll need one of the latest versions of IntelliJ IDEA – any version from 2018.1 onwards. You can download the latest free community version https://www.jetbrains.com/idea/download[here].
 
-This project is based on Spring Boot 2.4.0, which requires Kotlin 1.4.10. Make sure version 1.4+ of the Kotlin plugin is installed.To update the Kotlin plugin, use `Tools | Kotlin | Configure Kotlin Plugin Updates`.
+This project is based on Spring Boot 2.4.0, which requires Kotlin 1.4.10. Make sure version 1.4+ of the Kotlin plugin is installed. To update the Kotlin plugin, use `Tools | Kotlin | Configure Kotlin Plugin Updates`.
 
 === Downloading the project
 
