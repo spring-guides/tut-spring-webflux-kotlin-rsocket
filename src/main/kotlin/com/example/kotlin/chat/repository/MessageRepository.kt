@@ -22,7 +22,6 @@ interface MessageRepository : CoroutineCrudRepository<Message, String> {
         SELECT * FROM (
             SELECT * FROM MESSAGES
             WHERE SENT > (SELECT SENT FROM MESSAGES WHERE ID = :id)
-            ORDER BY "SENT" DESC 
         ) ORDER BY "SENT"
     """)
     fun findLatest(@Param("id") id: String): Flow<Message>
