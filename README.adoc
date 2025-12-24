@@ -1239,7 +1239,7 @@ class MessageResource(val messageService: MessageService) {
 
 To send the messages to the UI, we open the `stream` from the `messageService`, implemented by the `PersistentMessageService `class, and call the `onStart` method to start streaming the events. When a new client connects to the service, it will first receive the messages from the history thanks to the block of code that is supplied to the `onStart` method as an argument: `emitAll(messageService.latest())`. The channel then stays open to stream new messages.
 
-The `HtmlController` class no longer needs to to handle any of the streaming logic. Its purpose is now to serve the static page, so the implementation becomes trivial:
+The `HtmlController` class no longer needs to handle any of the streaming logic. Its purpose is now to serve the static page, so the implementation becomes trivial:
 
 [source,kotlin]
 -----
